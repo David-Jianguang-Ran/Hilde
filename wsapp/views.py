@@ -4,9 +4,14 @@ from django.shortcuts import render
 
 
 # place holder views
+
 def static_view(request):
-    return render(request, 'title.html')
+    return render(request, 'static.html')
 
 
-def live_view(request):
-    return render(request, 'main.html')
+def react_enabled_view(request):
+    return render(request, 'reactEnabled.html')
+
+
+def js_enabled_view(request):
+    return render(request, 'jsEnabled.html')

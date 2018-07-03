@@ -21,5 +21,5 @@ class LiveConsumer(AsyncJsonWebsocketConsumer):
 
     async def disconnect(self, code):
         # this method is called as a clean up
-        await print(str(self.scope)+" connection ended")
+        await print("connection ended with error code" + str(code))
         pass
