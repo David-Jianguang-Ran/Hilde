@@ -1,0 +1,4 @@
+.idea
+/node_modules
+/scratchy/config.py
+db.sqlite3
