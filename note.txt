@@ -1,9 +1,0 @@
-Hello!
-Please remember that a redis-server is REQUIRED in order for the channel_layer to work
-
-Below are commands needed to operate the dev-server
-starting server
-    # start redis
-    sudo service redis-server start
-    # start django-channels
-    python3 manage.py runworker channels
