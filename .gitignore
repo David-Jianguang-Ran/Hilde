@@ -2,3 +2,4 @@
 /node_modules
 /scratchy/config.py
 db.sqlite3
+webpack-stats.json

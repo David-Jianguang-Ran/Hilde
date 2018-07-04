@@ -1,5 +1,5 @@
 import React from 'react'
-import {incomingMessage,outgoingMessage} from 'ws_controller'
+//import {incomingMessage,outgoingMessage} from './ws_controller'
 
 export class DataComponent extends React.Component{
     render(){

@@ -1,1 +1,1 @@
-{"status":"error","error":"ModuleParseError","message":"Module parse failed: Unexpected token (8:4)\nYou may need an appropriate loader to handle this file type.\n| \n| ReactDOM.render(\n>     <dataComponent/>,\n|     rootContainer\n| )"}
+{"status":"done","chunks":{"main":[{"name":"main-b109acf121cda853e74a.js","path":"/home/davidran/Documents/programming/dj-channels-scratch/scratchy/static/bundles/main-b109acf121cda853e74a.js"}]}}
