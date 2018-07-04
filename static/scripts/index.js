@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import DataComponent from './app'
+import {DataComponent} from './app'
 
-const rootContainer = document.getElementById('reactContainer')
-var element = DataComponent()
+const rootContainer = document.getElementById('react_container')
 
 ReactDOM.render(
-    element,
+    <DataComponent/>,
     rootContainer
 )

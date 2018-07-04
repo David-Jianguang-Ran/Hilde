@@ -1,5 +1,6 @@
 .idea
 /node_modules
+/static/bundles
 /scratchy/config.py
 db.sqlite3
 webpack-stats.json
