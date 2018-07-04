@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{%  load render_bundle from webpack_loader %}
+
+{% block content %}
+    <div id="react_container">
+        <h1>this is not react</h1>
+    </div>
+    {% render_bundle 'main' %}
+
+{% endblock %}

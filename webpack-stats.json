@@ -1,0 +1,1 @@
+{"status":"error","error":"ModuleParseError","message":"Module parse failed: Unexpected token (8:4)\nYou may need an appropriate loader to handle this file type.\n| \n| ReactDOM.render(\n>     <dataComponent/>,\n|     rootContainer\n| )"}
