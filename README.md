@@ -19,6 +19,8 @@ A few quick tips:
   
     # [start|shutdown] redis
     sudo service redis-server [start|stop]
+    # build javascript bundle using npm
+    npm run build
     # start django-channels
     python3 manage.py runworker channels # recommended
     -or-
