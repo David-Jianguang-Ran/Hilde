@@ -2,5 +2,7 @@
 /node_modules
 /static/bundles
 /scratchy/config.py
+/scratchy/__pychache__
 db.sqlite3
 webpack-stats.json
+/mako

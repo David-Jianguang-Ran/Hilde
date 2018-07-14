@@ -11,11 +11,16 @@ class LiveConsumer(AsyncJsonWebsocketConsumer):
         try:
             await self.accept()
             print("ws connection established")
+            hello_msg = {
+                "content":"server says hello"
+            }
+            await self.send_json(hello_msg)
         except:
             await self.close()
 
     async def receive_json(self, content):
         # this method echos ws message back with timestamp
+        print("message received")
         content['server_timestamp'] = int(time.time())
         await self.send_json(content)
 
