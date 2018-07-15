@@ -12,6 +12,7 @@ class LiveConsumer(AsyncJsonWebsocketConsumer):
             await self.accept()
             print("ws connection established")
             hello_msg = {
+                "key":"default", # the key attributes will be used by client ws manager to route messages
                 "content":"server says hello"
             }
             await self.send_json(hello_msg)
@@ -22,6 +23,7 @@ class LiveConsumer(AsyncJsonWebsocketConsumer):
         # this method echos ws message back with timestamp
         print("message received")
         content['server_timestamp'] = int(time.time())
+        content['key'] = 'default'
         await self.send_json(content)
 
     async def disconnect(self, code):

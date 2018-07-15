@@ -10,14 +10,13 @@ const TextField = function (props) {
             </ul>
         </div>
 
-    )
-}
+    )}
 
 class TestApp extends React.Component{
     constructor(props){
         super(props)
         this.messageList = ["initial line"]
-        this.componentDidMount = this.componentDidMount.bind(this)// is this already done for me?
+        //this.componentDidMount = this.componentDidMount.bind(this)// is this already done for me?
         this.receiveMessage = this.receiveMessage.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
         this.addToMsgList = this.addToMsgList.bind(this)
@@ -27,7 +26,7 @@ class TestApp extends React.Component{
     }
     componentDidMount(){
         // and event listener for incoming message over ws connection
-        this.props.wsConnection.addEventListener("message",this.receiveMessage)
+        this.props.wsManager.addMessageListener('default',this.receiveMessage)
     }
     addToMsgList(msg,local=true){
         let entry = null
@@ -38,22 +37,23 @@ class TestApp extends React.Component{
         }
         this.messageList.push(entry)
     }
-    receiveMessage(event){
-        console.log(event)
-        let data = JSON.parse(event.data)
-        this.addToMsgList(data,false)
+    receiveMessage(msg){
+        // in this function, implement a switch/ type checker if ws messages needs to be routed
+        // multiple components
+        console.log("message routed to component")
+        this.addToMsgList(msg.content,false)
         this.setState({
             messageSerial: this.state.messageSerial + 1
         })
     }
     sendMessage(){
+        // don't forget to stringyfy json
         const msgContent = document.getElementById("message").value
         let message = {
             "type":"client.message",
             "content":msgContent
         }
-        message = JSON.stringify(message)
-        this.props.wsConnection.send(message)
+        this.props.wsManager.sendJSON(message)
         this.addToMsgList(msgContent)
         console.log("message sent")
         // return false // to stop the page from refreshing
