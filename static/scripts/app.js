@@ -12,6 +12,8 @@ const TextField = function (props) {
 
     )}
 
+    
+// note that wsManager is initialized in index.js and passed to this component as a prop
 class TestApp extends React.Component{
     constructor(props){
         super(props)
@@ -25,7 +27,7 @@ class TestApp extends React.Component{
         }
     }
     componentDidMount(){
-        // and event listener for incoming message over ws connection
+        // and event listener with the key you want for incoming message over ws connection
         this.props.wsManager.addMessageListener('default',this.receiveMessage)
     }
     addToMsgList(msg,local=true){
@@ -38,7 +40,7 @@ class TestApp extends React.Component{
         this.messageList.push(entry)
     }
     receiveMessage(msg){
-        // in this function, implement a switch/ type checker if ws messages needs to be routed
+        // in this function, implement a event handler for receiving message
         // multiple components
         console.log("message routed to component")
         this.addToMsgList(msg.content,false)
@@ -47,13 +49,15 @@ class TestApp extends React.Component{
         })
     }
     sendMessage(){
-        // don't forget to stringyfy json
         const msgContent = document.getElementById("message").value
         let message = {
             "type":"client.message",
             "content":msgContent
         }
+        
+        // call wsManager sendJSON method to send message over ws
         this.props.wsManager.sendJSON(message)
+        
         this.addToMsgList(msgContent)
         console.log("message sent")
         // return false // to stop the page from refreshing
