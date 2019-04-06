@@ -6,6 +6,9 @@ All the settings and configs are included, ideally it's a plug-n-play template
 
 A few quick tips:
 
+  -Ubuntu Users Beware:
+      python-dev must be installed before installing dependencies with pip
+
   -Below are the things you must install before starting the server.
   
       # Redis-server MUST BE installed in order for the channel_layers to work!
@@ -34,4 +37,5 @@ Enjoy!
 
 David Ham
 7/4/2018
+  
   
