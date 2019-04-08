@@ -1,5 +1,6 @@
 from channels.auth    import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter, ChannelNameRouter
+from hilde.consumers  import Dispatcher
 
 
 
@@ -15,5 +16,6 @@ application = ProtocolTypeRouter({
   
   "channel"   : ChannelNameRouter({
     # some name - consumer pairs
+    "Dispatcher" : Dispatcher
   })
 })

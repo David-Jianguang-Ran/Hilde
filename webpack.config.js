@@ -7,11 +7,12 @@ module.exports = {
   watch: true,
   context: __dirname,
   entry : {
-        // add name : path pairs below
+    // add name : path pairs below
+    
     },
   output: {
-        path: path.resolve('./static/bundles'),
-        filename: "[name]-dev.gitjs"
+    path: path.resolve('./static/bundles'),
+    filename: "[name]-dev.gitjs"
     },
   module: {
     rules: [{
