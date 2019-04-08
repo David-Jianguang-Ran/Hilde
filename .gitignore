@@ -2,5 +2,5 @@
 /node_modules
 /venv
 /project/key.py
-/**/__pycache__
+/**/__pycache__/
 db.sqlite3
