@@ -1,38 +1,23 @@
 {
-  "name": "scratchy",
-  "version": "1.0.0",
-  "description": "dj-react-template",
-  "main": "static/script/index.js",
-  "dependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router": "^4.3.1",
-    "webpack": "^4.14.0",
-    "webpack-bundle-tracker": "^0.3.0",
-    "webpack-command": "^0.4.0"
-  },
-  "devDependencies": {},
+  "name": "hilde",
+  "version": "2.0.0",
+  "description": "django-react template including personal-fav utility",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/David-Jianguang-Ran/scratchy.git"
+    "test"  : "echo \"Error: no test specified\" && exit 1",
+    "build" : "webpack"
   },
   "keywords": [
-    "django",
-    "channels",
-    "react.js"
+    "dev-only"
   ],
-  "author": "DavidRan",
+  "author": "David Ham",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/David-Jianguang-Ran/scratchy/issues"
-  },
-  "homepage": "https://github.com/David-Jianguang-Ran/scratchy#readme"
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.29.6"
+  }
 }

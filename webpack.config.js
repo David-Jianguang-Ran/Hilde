@@ -3,27 +3,24 @@ var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
-    mode:'development',
-    context: __dirname,
-    entry: './static/scripts/index', // entry point set to index.js
-    output: {
-        path: path.resolve('./static/bundles'),
-        filename: "[name]-[hash].js"
+  mode:'development',
+  watch: true,
+  context: __dirname,
+  entry : {
+        // add name : path pairs below
     },
-
-    plugins: [
-        new BundleTracker({filename: './webpack-stats.json'})
-    ],
-
-    module: {
-        rules: [
-        {
-            test: /\.js$/,
+  output: {
+        path: path.resolve('./static/bundles'),
+        filename: "[name]-dev.gitjs"
+    },
+  module: {
+    rules: [{
+            test: /\.jsx$/,
             exclude: /(node_modules)/,
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['react','env'],
+                    presets: ['react'],
                     babelrc: false,
                 }
             }
