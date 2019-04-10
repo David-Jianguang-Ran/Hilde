@@ -3,6 +3,8 @@ import project.settings as settings
 from .models import WebsocketTicket
 
 import django.contrib.auth.models as authmod
+import django.middleware.csrf
+
 
 def debugPrintPlease(some_str):
   if settings.DEBUG:
@@ -39,17 +41,41 @@ def validateWebsocketKey(user,ticket_identifier):
   return True
 
 
-def accessControl(some_method,user=None,required_perm=None):
+def accessControl(required_perms):
   """
-  TODO figure out how does decorators work with arguments
-  Hey if you want to do custom perm you'll have to add it somewhere in the app
-  :param some_method:
-  :param user:
-  :param required_perm:
+  This method is meant to enforce perms for a consumer method
+  dran : Hey if you want to do custom perm you'll have to add it somewhere <= where? in the app
+  also what happens when you check for a perm that doesn't exist?
+  :param required_perms: list or tuple
   :return:
   """
-  user = authmod.User
-  if user.has_perm(required_perm):
-    some_method()
+  def _decorator(decoratee):
+    # note that consumer method args look something like this:
+    # args = (consumer_instance,event)
+    
+    def _failHandler(*args,**kwargs):
+      debugPrintPlease("Method Access Denied for user: {} method: {}".format(args[0].scope['user'],decoratee))
+    
+    def _inner(*args,**kwargs):
+      user = args[0].scope['user']
+      
+      if not user:
+        return _failHandler(*args,**kwargs)
+      
+      if not user.has_perms(required_perms):
+        return _failHandler(*args,**kwargs)
+      else:
+        return decoratee(*args,**kwargs)
+      
+    return _inner
+  return _decorator
+
+
+
+      
+
+      
+    
+  
     
   

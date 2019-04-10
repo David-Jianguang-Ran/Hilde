@@ -3,7 +3,6 @@ from channels.routing import ProtocolTypeRouter, URLRouter, ChannelNameRouter
 from hilde.consumers  import Dispatcher
 
 
-
 application = ProtocolTypeRouter({
   # http views are already added by default
   

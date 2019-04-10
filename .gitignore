@@ -1,6 +1,6 @@
 .idea
 /node_modules
 /venv
-/project/key.py
+/project/keys.py
 /**/__pycache__/
 db.sqlite3

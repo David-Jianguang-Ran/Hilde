@@ -1,6 +1,7 @@
-from django.db                  import models
-from django.contrib.auth.models import User
-from hilde.utils                import debugPrintPlease
+from django.db                    import models
+from django.contrib.auth.models   import User
+from django.core.serializers      import serialize
+from hilde.utils                  import debugPrintPlease
 
 import uuid
 # Create your models here.
@@ -25,7 +26,7 @@ class AccessUtilityMixin:
   
   def serialize(self, depth=None):
     # TODO add complex thunking logic here
-    return str(self)
+    return serialize("json",self)
   
   
 class WebsocketTicket (AccessUtilityMixin, models):
