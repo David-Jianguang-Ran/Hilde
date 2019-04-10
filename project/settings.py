@@ -44,6 +44,8 @@ CHANNEL_LAYERS   = {
 
 # Application definition
 
+AUTH_USER_MODEL = "hilde.User"
+
 INSTALLED_APPS = [
     'hilde',
     'channels',
