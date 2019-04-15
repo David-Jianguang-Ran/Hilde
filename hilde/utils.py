@@ -41,9 +41,15 @@ def validateWebsocketKey(user,ticket_identifier):
   return True
 
 
-def accessControl(required_perms):
+###
+##
+# Decorators for Consumer Methods
+# TODO make async versions for these decorators
+
+
+def requirePerms(required_perms):
   """
-  This method is meant to enforce perms for a consumer method
+  This decorator is meant to enforce perms for a consumer method
   dran : Hey if you want to do custom perm you'll have to add it somewhere <= where? in the app
   also what happens when you check for a perm that doesn't exist?
   :param required_perms: list or tuple
@@ -70,12 +76,27 @@ def accessControl(required_perms):
     return _inner
   return _decorator
 
-
-
+# TODO write JS ws manager method to work with this
+def autoReply(decoratee):
+  """
+  This decorator is meant attach a reply key then send response down ws connection
+  WHen used with ws manager, this method can automatically route message to the js component
+  :param decoratee:
+  :return:
+  """
+  # note that consumer method args look something like this:
+  # args = (consumer_instance,event)
+  def _inner(*args,**kwargs):
       
-
+      reply_key     = args[1]['reply_key']
       
-    
+      result        = decoratee(*args,**kwargs)
+      result['key'] = reply_key
+      
+      args[0].send_json(result)
+  
+  return _inner
+  
   
     
   

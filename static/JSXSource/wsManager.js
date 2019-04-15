@@ -1,3 +1,5 @@
+import uuid4 from "uuid/v4.js"
+
 export default class WebSocketManager {
     // this obj is to be init and passed to the top level component as a prop in entry point
     // any child component can call this.prop.wsManager.sendJSON to send data
@@ -11,6 +13,7 @@ export default class WebSocketManager {
             "messageKey":"messageHandler"
         }
         this.sendJSON             = this.sendJSON.bind(this)
+        this.sendJSONReturnPromise = this.sendJSONReturnPromise.bind(this)
         this.messageSwitcher      = this.messageSwitcher.bind(this)
         this.addMessageListener   = this.addMessageListener.bind(this)
 
@@ -19,8 +22,27 @@ export default class WebSocketManager {
         this.ws.addEventListener('message', this.messageSwitcher)
         console.log("ws connection initialized")
     }
-    sendJSON (obj) {
-        let data                  = JSON.stringify(obj)
+    sendJSON (message,replyHandler) {
+        /*
+        New feature in type19:
+        Now components can call sendJSON and give it an callback to handle returned data
+         */
+        if (replyHandler !== null) {
+            let reply_key         = uuid4()
+            // make sure the ws manager instance is in scope for the wrapper
+            let replyHandlerWrapper // = replyHandlerWrapper.bind(this)
+            replyHandlerWrapper   = function (event) {
+                // remove message listener
+                delete this.messageRoutingTable[reply_key]
+                // pass event along to replyhandler
+                replyHandler(event)
+            }
+
+            message.reply_key     = reply_key
+            this.addMessageListener(reply_key,replyHandlerWrapper)
+        }
+
+        let data                  = JSON.stringify(message)
         this.ws.send(data)
         console.log("ws message sent")
     }
