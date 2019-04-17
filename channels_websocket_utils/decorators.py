@@ -3,6 +3,11 @@ from .utils import debug_print
 
 ###
 ##
+# Decorators for function based views
+# TODO Add function based django view decorator for attaching websocket token to context
+
+###
+##
 # Decorators for Consumer Methods
 # TODO make async versions for these decorators
 def require_perms(required_perms):

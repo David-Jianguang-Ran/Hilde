@@ -46,8 +46,8 @@ CHANNEL_LAYERS   = {
 
 
 INSTALLED_APPS = [
-    
-    "channels_websocket_uitls",
+    "testy",
+    "channels_websocket_utils",
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
