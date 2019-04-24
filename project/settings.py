@@ -44,10 +44,10 @@ CHANNEL_LAYERS   = {
 
 # Application definition
 
-AUTH_USER_MODEL = "hilde.User"
 
 INSTALLED_APPS = [
-    'hilde',
+    "testy",
+    "channels_websocket_utils",
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',

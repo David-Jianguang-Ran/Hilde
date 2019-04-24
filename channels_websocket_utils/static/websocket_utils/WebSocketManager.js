@@ -5,7 +5,7 @@ export default class WebSocketManager {
     // 1) write method used to handle incoming message in the class based component
     // 2) in component did mount or constructor (I haven't decided/tested constructor)
     // call addMessageListener with the string key and the message handler (don't call it with ())
-    constructor(path,ticket) {
+    constructor(path,token = null) {
         this.outstandingMessage   = false
         this.messageRoutingTable  = {
             "messageKey":"messageHandler"
@@ -14,32 +14,45 @@ export default class WebSocketManager {
         this.messageSwitcher      = this.messageSwitcher.bind(this)
         this.addMessageListener   = this.addMessageListener.bind(this)
 
-        let target_url            = window.location.hostname + path + ticket
+        let target_url            = window.location.hostname + path + token
         this.ws                   = new WebSocket(target_url)
         this.ws.addEventListener('message', this.messageSwitcher)
-        console.log("ws connection initialized")
     }
-    sendJSON (obj) {
-        let data                  = JSON.stringify(obj)
+
+    addMessageListener (key, method) {
+        this.messageRoutingTable[key] = method
+        console.log("ws message listener added wit key" + key)
+        console.log(this.messageRoutingTable)
+    }
+
+    sendJSON (message,replyHandler) {
+        /*
+        New feature in type19:
+        Now components can call sendJSON and give it an callback to handle returned data
+         */
+        if (replyHandler !== null) {
+            let reply_key         =
+            message.reply_key     = reply_key
+            this.addMessageListener(reply_key,function (event) {
+                // remove message listener
+                delete this.messageRoutingTable[reply_key]
+                // pass event along to replyhandler
+                replyHandler(event)
+            })
+        }
+
+        let data                  = JSON.stringify(message)
         this.ws.send(data)
-        console.log("ws message sent")
     }
+
     messageSwitcher (event) {
         let obj                   = JSON.parse(event.data)
-        console.log(obj.key)
         for (let key in this.messageRoutingTable) {
             console.log(key)
             if (key             === obj.key) {
                 this.messageRoutingTable[key](obj)
             }
         }
-        console.log("ws received with key" + obj.key)
-        console.log(event)
     }
-    addMessageListener (key, method) {
-        this.messageRoutingTable[key] = method
-        console.log("ws message listener added wit key" + key)
-        console.log(this.messageRoutingTable)
-    }
-}
 
+}
